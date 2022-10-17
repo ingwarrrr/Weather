@@ -19,9 +19,8 @@
 
 Приложение, которое отображает прогноз погоды исходя из местоположения пользователя. В качестве API использовал - openweathermap.org.
 
-<img src="![Simulator_Screen_Shot_iPhone_14_Pro_2022_10_17_at_08_55_01](https://user-images.githubusercontent.com/64618065/196105555-ed46bc69-55d9-4f69-910a-d9095f304f17.png)
-![Simulator_Screen_Shot_iPhone_14_Pro_2022_10_17_at_09_04_21_2](https://user-images.githubusercontent.com/64618065/196105563-0b5af2eb-db87-4b4a-8964-1b5736ae1275.png)
-" alt="drawing" width="150"/>
+![Screen_Shot_01](https://user-images.githubusercontent.com/64618065/196105855-cc4601c1-851d-4033-acd6-6796fdabba36.png)
+![Screen_Shot_2](https://user-images.githubusercontent.com/64618065/196105899-93eeded5-97d7-419e-b057-3350f7d77ad8.png)
 
 ## Используемые технологии
 
