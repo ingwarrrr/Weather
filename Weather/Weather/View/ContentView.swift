@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var locationService = LocationService()
+    @State var weather: WeatherModel?
+    var weatherService = WeatherService()
     
     var body: some View {
         ZStack {
@@ -18,7 +20,18 @@ struct ContentView: View {
             VStack {
                 
                 if let location = locationService.location {
-                    Text("Твое местороложение: \(location.longitude), \(location.latitude)")
+                    if let weather = weather {
+                        WeatherView(weather: weather)
+                    } else {
+                        LoadingView()
+                            .task {
+                                do {
+                                    weather = try await weatherService.fetchCurrentWeatherFrom(latitude: location.latitude, longtitude: location.longitude)
+                                } catch{
+                                    print("Ошибка при получении данных погоды: \(error.localizedDescription)")
+                                }
+                            }
+                    }
                 } else {
                     if locationService.isLoading {
                         LoadingView()
