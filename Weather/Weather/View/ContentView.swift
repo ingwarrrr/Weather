@@ -16,9 +16,19 @@ struct ContentView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                GreetingView()
-                    .environmentObject(locationService)
+                
+                if let location = locationService.location {
+                    Text("Твое местороложение: \(location.longitude), \(location.latitude)")
+                } else {
+                    if locationService.isLoading {
+                        LoadingView()
+                    } else {
+                        GreetingView()
+                            .environmentObject(locationService)
+                    }
+                }
             }
+            .preferredColorScheme(.dark)
         }
     }
 }

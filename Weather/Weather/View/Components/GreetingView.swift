@@ -6,13 +6,31 @@
 //
 
 import SwiftUI
+import CoreLocationUI
 
 struct GreetingView: View {
     
     @EnvironmentObject var locationService: LocationService
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            VStack(spacing: 20) {
+                Text("Приветствую в Weather")
+                    .bold().font(.title)
+                Text("Пожалуйста поделитесь данными своего местоположения")
+                    .padding()
+            }
+            .multilineTextAlignment(.center)
+            .padding()
+            
+            LocationButton(.shareCurrentLocation) {
+                locationService.requestLocation()
+            }
+            .cornerRadius(30)
+            .symbolVariant(.fill)
+            .foregroundColor(.white)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
