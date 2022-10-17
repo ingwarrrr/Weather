@@ -15,6 +15,10 @@ struct GreetingView: View {
     var body: some View {
         VStack {
             VStack(spacing: 20) {
+                Image("cloud")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 150)
                 Text("Приветствую в Weather")
                     .bold().font(.title)
                 Text("Пожалуйста поделитесь данными своего местоположения")

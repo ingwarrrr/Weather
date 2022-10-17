@@ -25,23 +25,25 @@ struct WeatherView: View {
                 
                 VStack {
                     HStack {
-                        VStack(spacing: 20) {
-                            Image(systemName: "sun.max")
-                                .font(.system(size: 40))
-                            
-                            Text(weather.weather[0].main)
-                        }.frame(width: 150, alignment: .leading)
-                        
-                        Spacer()
-                        
                         Text(weather.main.feelsLike.roundDouble() + "°")
                             .font(.system(size: 100))
                             .fontWeight(.bold)
                             .padding()
+                            .frame(width: 200, alignment: .leading)
+                        
+                        Spacer()
+                            
+                        VStack(spacing: 20) {
+                            Image(systemName: "cloud")
+                                .font(.system(size: 40))
+                            
+                            Text(weather.weather[0].main)
+                        }
+                        .padding(.trailing)
                     }
                     
                     Spacer()
-                        .frame(height: 40)
+                        .frame(height: 5)
                     
                     AsyncImage(url: URL(string: "https://static.vecteezy.com/system/resources/previews/000/183/639/large_2x/flat-design-vector-landscape-illustration.jpg")) { image in
                         image
@@ -64,7 +66,20 @@ struct WeatherView: View {
                 Spacer()
                 
                 VStack(alignment: .leading, spacing: 20) {
+                    Text("Погода сейчас")
+                        .bold().padding(.bottom)
                     
+                    HStack {
+                        WeatherRow(logo: "thermometer.snowflake", name: "Минимальная температура", value: weather.main.tempMin.roundDouble() + "°")
+                        Spacer()
+                        WeatherRow(logo: "thermometer.sun.fill", name: "Максимальная температура", value: weather.main.tempMax.roundDouble() + "°")
+                    }
+                    HStack {
+                        WeatherRow(logo: "wind", name: "Скорость ветра", value: weather.wind.speed.roundDouble() + " м/с")
+                        Spacer()
+                        WeatherRow(logo: "humidity", name: "Влажность", value: weather.main.humidity.roundDouble() + "°")
+                            .padding(.trailing, 25)
+                    }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
@@ -75,7 +90,6 @@ struct WeatherView: View {
             }
         }
         .edgesIgnoringSafeArea(.bottom)
-        .background(Color(hue: 0.656, saturation: 0.787, brightness: 0.354))
         .preferredColorScheme(.dark)
     }
 }

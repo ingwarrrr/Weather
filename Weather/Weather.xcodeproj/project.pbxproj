@@ -21,6 +21,8 @@
 		78E63D3528FCFFA100C44504 /* PreviewWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E63D3428FCFFA100C44504 /* PreviewWeatherData.swift */; };
 		78E63D3728FCFFF900C44504 /* City.json in Resources */ = {isa = PBXBuildFile; fileRef = 78E63D3628FCFFF900C44504 /* City.json */; };
 		78E63D3928FD12C400C44504 /* WeatherRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E63D3828FD12C400C44504 /* WeatherRow.swift */; };
+		78E63D3C28FD2A7900C44504 /* Simulator Screen Shot - iPhone 14 Pro - 2022-10-17 at 09.04.21.png in Resources */ = {isa = PBXBuildFile; fileRef = 78E63D3A28FD2A7900C44504 /* Simulator Screen Shot - iPhone 14 Pro - 2022-10-17 at 09.04.21.png */; };
+		78E63D3D28FD2A7900C44504 /* Simulator Screen Shot - iPhone 14 Pro - 2022-10-17 at 08.55.01.png in Resources */ = {isa = PBXBuildFile; fileRef = 78E63D3B28FD2A7900C44504 /* Simulator Screen Shot - iPhone 14 Pro - 2022-10-17 at 08.55.01.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,8 @@
 		78E63D3428FCFFA100C44504 /* PreviewWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewWeatherData.swift; sourceTree = "<group>"; };
 		78E63D3628FCFFF900C44504 /* City.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = City.json; sourceTree = "<group>"; };
 		78E63D3828FD12C400C44504 /* WeatherRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRow.swift; sourceTree = "<group>"; };
+		78E63D3A28FD2A7900C44504 /* Simulator Screen Shot - iPhone 14 Pro - 2022-10-17 at 09.04.21.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Simulator Screen Shot - iPhone 14 Pro - 2022-10-17 at 09.04.21.png"; path = "../../../../../Simulator Screen Shot - iPhone 14 Pro - 2022-10-17 at 09.04.21.png"; sourceTree = "<group>"; };
+		78E63D3B28FD2A7900C44504 /* Simulator Screen Shot - iPhone 14 Pro - 2022-10-17 at 08.55.01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Simulator Screen Shot - iPhone 14 Pro - 2022-10-17 at 08.55.01.png"; path = "../../../../../Simulator Screen Shot - iPhone 14 Pro - 2022-10-17 at 08.55.01.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +137,8 @@
 				78D11A2628FB9CE800080EE5 /* Preview Assets.xcassets */,
 				78E63D3428FCFFA100C44504 /* PreviewWeatherData.swift */,
 				78E63D3628FCFFF900C44504 /* City.json */,
+				78E63D3B28FD2A7900C44504 /* Simulator Screen Shot - iPhone 14 Pro - 2022-10-17 at 08.55.01.png */,
+				78E63D3A28FD2A7900C44504 /* Simulator Screen Shot - iPhone 14 Pro - 2022-10-17 at 09.04.21.png */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -203,6 +209,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78E63D3D28FD2A7900C44504 /* Simulator Screen Shot - iPhone 14 Pro - 2022-10-17 at 08.55.01.png in Resources */,
+				78E63D3C28FD2A7900C44504 /* Simulator Screen Shot - iPhone 14 Pro - 2022-10-17 at 09.04.21.png in Resources */,
 				78E63D3728FCFFF900C44504 /* City.json in Resources */,
 				78D11A2728FB9CE800080EE5 /* Preview Assets.xcassets in Resources */,
 				78D11A2428FB9CE800080EE5 /* Assets.xcassets in Resources */,
@@ -361,8 +369,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -371,9 +379,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ingwarrrr.Weather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -391,8 +402,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -401,9 +412,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ingwarrrr.Weather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
