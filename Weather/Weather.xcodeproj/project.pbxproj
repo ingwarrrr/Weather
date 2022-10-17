@@ -20,6 +20,7 @@
 		78E63D3128FCFEBC00C44504 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E63D3028FCFEBC00C44504 /* WeatherView.swift */; };
 		78E63D3528FCFFA100C44504 /* PreviewWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E63D3428FCFFA100C44504 /* PreviewWeatherData.swift */; };
 		78E63D3728FCFFF900C44504 /* City.json in Resources */ = {isa = PBXBuildFile; fileRef = 78E63D3628FCFFF900C44504 /* City.json */; };
+		78E63D3928FD12C400C44504 /* WeatherRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E63D3828FD12C400C44504 /* WeatherRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		78E63D3028FCFEBC00C44504 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		78E63D3428FCFFA100C44504 /* PreviewWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewWeatherData.swift; sourceTree = "<group>"; };
 		78E63D3628FCFFF900C44504 /* City.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = City.json; sourceTree = "<group>"; };
+		78E63D3828FD12C400C44504 /* WeatherRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				78E63D2328FCD3AD00C44504 /* Components */,
+				78E63D2428FCD44900C44504 /* GreetingView.swift */,
 				78D11A2128FB9CE600080EE5 /* ContentView.swift */,
 				78E63D2A28FCE40400C44504 /* LoadingView.swift */,
 				78E63D3028FCFEBC00C44504 /* WeatherView.swift */,
@@ -137,7 +140,7 @@
 		78E63D2328FCD3AD00C44504 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				78E63D2428FCD44900C44504 /* GreetingView.swift */,
+				78E63D3828FD12C400C44504 /* WeatherRow.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78E63D3928FD12C400C44504 /* WeatherRow.swift in Sources */,
 				78E63D2728FCD6D300C44504 /* Extensions.swift in Sources */,
 				78D11A2228FB9CE600080EE5 /* ContentView.swift in Sources */,
 				78E63D2528FCD44900C44504 /* GreetingView.swift in Sources */,
