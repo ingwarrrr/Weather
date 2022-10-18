@@ -7,13 +7,14 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    @StateObject var locationService = LocationService()
-    @State var weather: WeatherModel?
-    var weatherService: WeatherServiceProtocol
+struct HomeView: View {
+    @StateObject var locationService: LocationService
+    @ObservedObject var viewModel: HomeViewModel
     
-    init(weatherService: WeatherServiceProtocol = WeatherService.shared) {
-        self.weatherService = weatherService
+    init(_ viewModel: ObservedObject<HomeViewModel>,
+         _ locationService: LocationService) {
+        _viewModel = viewModel
+        _locationService = StateObject(wrappedValue: locationService)
     }
     
     var body: some View {
@@ -24,16 +25,12 @@ struct ContentView: View {
             VStack {
                 
                 if let location = locationService.location {
-                    if let weather = weather {
+                    if let weather = viewModel.weather {
                         WeatherView(weather: weather)
                     } else {
                         LoadingView()
                             .task {
-                                do {
-                                    weather = try await weatherService.fetchCurrentWeatherFor(latitude: location.latitude, longtitude: location.longitude)
-                                } catch{
-                                    print("Ошибка при получении данных погоды: \(error.localizedDescription)")
-                                }
+                                await viewModel.fetchWeather(latitude: location.latitude, longtitude: location.longitude)
                             }
                     }
                 } else {
@@ -52,6 +49,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        HomeView(ObservedObject(wrappedValue: HomeViewModel()), LocationService())
     }
 }

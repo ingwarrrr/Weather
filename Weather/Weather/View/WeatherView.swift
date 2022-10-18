@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WeatherView: View {
-    var weather: WeatherModel
+    var weather: WeatherResponce
     
     var body: some View {
         ZStack(alignment: .leading) {

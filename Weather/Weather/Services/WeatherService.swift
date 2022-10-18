@@ -9,7 +9,7 @@ import Foundation
 import CoreLocation
 
 protocol WeatherServiceProtocol {
-    func fetchCurrentWeatherFor(latitude: CLLocationDegrees, longtitude: CLLocationDegrees) async throws -> WeatherModel
+    func fetchCurrentWeatherFor(latitude: CLLocationDegrees, longtitude: CLLocationDegrees) async throws -> WeatherResponce
 }
 
 class WeatherService {
@@ -18,7 +18,7 @@ class WeatherService {
 }
 
 extension WeatherService: WeatherServiceProtocol {
-    func fetchCurrentWeatherFor(latitude: CLLocationDegrees, longtitude: CLLocationDegrees) async throws -> WeatherModel {
+    func fetchCurrentWeatherFor(latitude: CLLocationDegrees, longtitude: CLLocationDegrees) async throws -> WeatherResponce {
         let urlComponents = makeCurrentWeatherComponents(latitude: latitude, longtitude: longtitude)
         guard let url = urlComponents.url else { fatalError("Ошибка URL") }
         
@@ -28,7 +28,7 @@ extension WeatherService: WeatherServiceProtocol {
         guard (response as? HTTPURLResponse)?.statusCode == 200 else { fatalError("Ошибка на получение запроса данных погоды")}
         
         let decoder = JSONDecoder()
-        let weatherData = try decoder.decode(WeatherModel.self, from: data)
+        let weatherData = try decoder.decode(WeatherResponce.self, from: data)
         
         return weatherData
     }

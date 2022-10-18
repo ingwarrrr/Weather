@@ -11,7 +11,10 @@ import SwiftUI
 struct WeatherApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            var locationService: LocationService = LocationService()
+            var viewModel: HomeViewModel = HomeViewModel()
+            
+            HomeView(ObservedObject(wrappedValue: viewModel), locationService)
         }
     }
 }
