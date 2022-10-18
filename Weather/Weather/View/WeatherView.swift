@@ -29,7 +29,7 @@ struct WeatherView: View {
                             .font(.system(size: 100))
                             .fontWeight(.bold)
                             .padding()
-                            .frame(width: 200, alignment: .leading)
+                            .frame(width: 250, alignment: .leading)
                         
                         Spacer()
                             

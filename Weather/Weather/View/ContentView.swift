@@ -10,7 +10,11 @@ import SwiftUI
 struct ContentView: View {
     @StateObject var locationService = LocationService()
     @State var weather: WeatherModel?
-    var weatherService = WeatherService()
+    var weatherService: WeatherServiceProtocol
+    
+    init(weatherService: WeatherServiceProtocol = WeatherService.shared) {
+        self.weatherService = weatherService
+    }
     
     var body: some View {
         ZStack {
@@ -26,7 +30,7 @@ struct ContentView: View {
                         LoadingView()
                             .task {
                                 do {
-                                    weather = try await weatherService.fetchCurrentWeatherFrom(latitude: location.latitude, longtitude: location.longitude)
+                                    weather = try await weatherService.fetchCurrentWeatherFor(latitude: location.latitude, longtitude: location.longitude)
                                 } catch{
                                     print("Ошибка при получении данных погоды: \(error.localizedDescription)")
                                 }
