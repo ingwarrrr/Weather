@@ -17,6 +17,7 @@ protocol HomeViewModelProtocol {
 
 @MainActor final class HomeViewModel: ObservableObject {
     @Published var weather: WeatherResponce?
+    var cancellation: AnyCancellable?
     var weatherService: WeatherServiceProtocol
 
     init(weatherService: WeatherServiceProtocol = WeatherService.shared) {
@@ -31,5 +32,7 @@ extension HomeViewModel: HomeViewModelProtocol {
         } catch{
             print("Ошибка при получении данных погоды: \(error.localizedDescription)")
         }
+        
+//        cancellation = weatherService.fetchCurrentWeatherFor(latitude: latitude, longtitude: longtitude)
     }
 }

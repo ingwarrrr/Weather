@@ -8,13 +8,20 @@
 import SwiftUI
 
 struct WeatherView: View {
+    
     var weather: WeatherResponce
+    @ObservedObject var viewModel: WeatherViewModel
+    
+    init(weather: WeatherResponce) {
+        self.weather = weather
+        self.viewModel = WeatherViewModel(weather: weather)
+    }
     
     var body: some View {
         ZStack(alignment: .leading) {
             VStack {
                 VStack(alignment: .leading, spacing: 5) {
-                    Text(weather.name)
+                    Text(viewModel.cityName)
                         .bold().font(.title)
                     Text("Сегодня, \(Date().formatted(.dateTime.month().day().hour().minute()))")
                         .fontWeight(.light)
@@ -25,7 +32,7 @@ struct WeatherView: View {
                 
                 VStack {
                     HStack {
-                        Text(weather.main.feelsLike.roundDouble() + "°")
+                        Text(viewModel.feelsLike)
                             .font(.system(size: 100))
                             .fontWeight(.bold)
                             .padding()
@@ -37,7 +44,7 @@ struct WeatherView: View {
                             Image(systemName: "cloud")
                                 .font(.system(size: 40))
                             
-                            Text(weather.weather[0].main)
+                            Text(viewModel.main)
                         }
                         .padding(.trailing)
                     }
@@ -70,14 +77,14 @@ struct WeatherView: View {
                         .bold().padding(.bottom)
                     
                     HStack {
-                        WeatherRow(logo: "thermometer.snowflake", name: "Минимальная температура", value: weather.main.tempMin.roundDouble() + "°")
+                        WeatherRow(logo: "thermometer.snowflake", name: "Минимальная температура", value: viewModel.tempMin)
                         Spacer()
-                        WeatherRow(logo: "thermometer.sun.fill", name: "Максимальная температура", value: weather.main.tempMax.roundDouble() + "°")
+                        WeatherRow(logo: "thermometer.sun.fill", name: "Максимальная температура", value: viewModel.tempMax)
                     }
                     HStack {
-                        WeatherRow(logo: "wind", name: "Скорость ветра", value: weather.wind.speed.roundDouble() + " м/с")
+                        WeatherRow(logo: "wind", name: "Скорость ветра", value: viewModel.windSpeed)
                         Spacer()
-                        WeatherRow(logo: "humidity", name: "Влажность", value: weather.main.humidity.roundDouble() + "°")
+                        WeatherRow(logo: "humidity", name: "Влажность", value: viewModel.humidity)
                             .padding(.trailing, 25)
                     }
                 }
