@@ -34,5 +34,6 @@
 
 * SwiftUI
 * Combine
+* Alamofire
 * MVVM
 * JSON parsing
