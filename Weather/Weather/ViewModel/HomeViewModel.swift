@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import CoreLocation
+import Alamofire
 
 protocol HomeViewModelProtocol {
     var weather: WeatherResponce? { get }
@@ -18,23 +19,18 @@ protocol HomeViewModelProtocol {
 @MainActor final class HomeViewModel: ObservableObject {
     
     // MARK: - Published properties
-
+    
     @Published var weather: WeatherResponce?
     
     // MARK: - Properties
     
-    enum PageState {
-            case idle
-            case loading
-            case failed(ErrorType)
-            case loaded(WeatherResponce)
-        }
-
-    private var subscriptions: Set<AnyCancellable> = []
     private var weatherService: OpenWeatherAPIProtocol
+    private let baseURL = "https://api.openweathermap.org/data/2.5/weather"
+    private let APIKey = "75dfad1749d7bd498d8431971023296f"
+    private var task: Cancellable?
     
     // MARK: - Initializers
-
+    
     init(weatherService: OpenWeatherAPIProtocol = OpenWeatherAPI.shared) {
         self.weatherService = weatherService
     }
@@ -50,5 +46,30 @@ extension HomeViewModel: HomeViewModelProtocol {
         } catch{
             print("Ошибка при получении данных погоды: \(error.localizedDescription)")
         }
+    }
+    
+    // MARK: - Alamofire
+    
+    func fetchCurrentWeather(latitude: CLLocationDegrees, longtitude: CLLocationDegrees) async {
+
+        guard let url = weatherService.absoluteURL(latitude: latitude, longtitude: longtitude) else { fatalError("Ошибка URL") }
+
+        self.task = AF.request(url)
+            .publishDecodable(type: WeatherResponce.self)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    ()
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }, receiveValue: { [weak self] response in
+                switch response.result {
+                case .success(let weather):
+                    self?.weather = weather
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            })
     }
 }

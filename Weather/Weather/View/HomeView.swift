@@ -18,32 +18,32 @@ struct HomeView: View {
     }
     
     var body: some View {
-        ZStack {
-            LinearGradient(gradient: .init(colors: [.blue.opacity(0.2), .blue]), startPoint: .top, endPoint: .bottom)
-                .edgesIgnoringSafeArea(.all)
+        VStack {
             
-            VStack {
-                
-                if let location = locationService.location {
-                    if let weather = viewModel.weather {
-                        WeatherView(weather: weather)
-                    } else {
-                        LoadingView()
-                            .task {
-                                await viewModel.fetchWeather(latitude: location.latitude, longtitude: location.longitude)
-                            }
-                    }
+            if let location = locationService.location {
+                if let weather = viewModel.weather {
+                    WeatherView(weather: weather)
                 } else {
-                    if locationService.isLoading {
-                        LoadingView()
-                    } else {
-                        GreetingView()
-                            .environmentObject(locationService)
-                    }
+                    LoadingView()
+                        .task {
+                            await viewModel.fetchCurrentWeather(latitude: location.latitude, longtitude: location.longitude)
+                        }
+                }
+            } else {
+                if locationService.isLoading {
+                    LoadingView()
+                } else {
+                    GreetingView()
+                        .environmentObject(locationService)
                 }
             }
-            .preferredColorScheme(.dark)
         }
+        .preferredColorScheme(.dark)
+        .background(
+            LinearGradient(gradient: .init(colors: [.blue.opacity(0.2), .blue]), startPoint: .top, endPoint: .bottom)
+                .edgesIgnoringSafeArea(.all)
+        )
+        
     }
 }
 
