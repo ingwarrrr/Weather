@@ -33,5 +33,6 @@
 ## Используемые технологии
 
 * SwiftUI
-* MVC
+* Combine
+* MVVM
 * JSON parsing
