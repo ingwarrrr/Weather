@@ -36,4 +36,5 @@
 * Combine
 * Alamofire
 * MVVM
+* CoreLocation
 * JSON parsing
