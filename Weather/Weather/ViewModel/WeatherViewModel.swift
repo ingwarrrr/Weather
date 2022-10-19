@@ -19,11 +19,12 @@ protocol WeatherViewModelProtocol {
 }
 
 @MainActor final class WeatherViewModel: ObservableObject {
+    
+    // MARK: - Published properties
+    
     @Published var weather: WeatherResponce
     
-    init(weather: WeatherResponce) {
-        self.weather = weather
-    }
+    // MARK: - Properties
     
     var cityName: String {
         weather.name
@@ -51,5 +52,11 @@ protocol WeatherViewModelProtocol {
     
     var humidity: String {
         weather.main.humidity.roundDouble() + "°"
+    }
+    
+    // MARK: - Initializers
+    
+    init(weather: WeatherResponce) {
+        self.weather = weather
     }
 }

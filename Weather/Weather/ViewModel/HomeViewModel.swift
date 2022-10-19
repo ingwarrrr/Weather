@@ -16,23 +16,39 @@ protocol HomeViewModelProtocol {
 }
 
 @MainActor final class HomeViewModel: ObservableObject {
-    @Published var weather: WeatherResponce?
-    var cancellation: AnyCancellable?
-    var weatherService: WeatherServiceProtocol
+    
+    // MARK: - Published properties
 
-    init(weatherService: WeatherServiceProtocol = WeatherService.shared) {
+    @Published var weather: WeatherResponce?
+    
+    // MARK: - Properties
+    
+    enum PageState {
+            case idle
+            case loading
+            case failed(ErrorType)
+            case loaded(WeatherResponce)
+        }
+
+    private var subscriptions: Set<AnyCancellable> = []
+    private var weatherService: OpenWeatherAPIProtocol
+    
+    // MARK: - Initializers
+
+    init(weatherService: OpenWeatherAPIProtocol = OpenWeatherAPI.shared) {
         self.weatherService = weatherService
     }
 }
 
 extension HomeViewModel: HomeViewModelProtocol {
+    
+    // MARK: - Methods
+    
     func fetchWeather(latitude: CLLocationDegrees, longtitude: CLLocationDegrees) async {
         do {
             weather = try await weatherService.fetchCurrentWeatherFor(latitude: latitude, longtitude: longtitude)
         } catch{
             print("Ошибка при получении данных погоды: \(error.localizedDescription)")
         }
-        
-//        cancellation = weatherService.fetchCurrentWeatherFor(latitude: latitude, longtitude: longtitude)
     }
 }

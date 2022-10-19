@@ -9,8 +9,9 @@ import SwiftUI
 
 struct WeatherView: View {
     
-    var weather: WeatherResponce
     @ObservedObject var viewModel: WeatherViewModel
+    var weather: WeatherResponce
+
     
     init(weather: WeatherResponce) {
         self.weather = weather
