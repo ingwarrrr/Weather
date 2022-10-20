@@ -28,6 +28,11 @@ struct HomeView: View {
                         .task {
                             await viewModel.fetchCurrentWeather(latitude: location.latitude, longtitude: location.longitude)
                         }
+                        .alert(isPresented: $viewModel.hasError, error: viewModel.error) {
+                            Button(action: {}) {
+                                Text("Retry")
+                            }
+                        }
                 }
             } else {
                 if locationService.isLoading {
@@ -43,7 +48,6 @@ struct HomeView: View {
             LinearGradient(gradient: .init(colors: [.blue.opacity(0.2), .blue]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
         )
-        
     }
 }
 
