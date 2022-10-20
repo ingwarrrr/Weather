@@ -13,7 +13,8 @@ import Alamofire
 protocol HomeViewModelProtocol {
     var weather: WeatherResponce? { get }
     
-    func fetchWeather(latitude: CLLocationDegrees, longtitude: CLLocationDegrees) async
+//    func fetchWeather(latitude: CLLocationDegrees, longtitude: CLLocationDegrees) async
+    func fetchCurrentWeather(latitude: CLLocationDegrees, longtitude: CLLocationDegrees) async
 }
 
 @MainActor final class HomeViewModel: ObservableObject {
@@ -21,6 +22,8 @@ protocol HomeViewModelProtocol {
     // MARK: - Published properties
     
     @Published var weather: WeatherResponce?
+    @Published var hasError = false
+    @Published var error: DataError?
     
     // MARK: - Properties
     
@@ -40,19 +43,26 @@ extension HomeViewModel: HomeViewModelProtocol {
     
     // MARK: - Methods
     
-    func fetchWeather(latitude: CLLocationDegrees, longtitude: CLLocationDegrees) async {
-        do {
-            weather = try await weatherService.fetchCurrentWeatherFor(latitude: latitude, longtitude: longtitude)
-        } catch{
-            print("Ошибка при получении данных погоды: \(error.localizedDescription)")
-        }
-    }
+//    func fetchWeather(latitude: CLLocationDegrees, longtitude: CLLocationDegrees) async {
+//        hasError = false
+//
+//        do {
+//            weather = try await weatherService.fetchCurrentWeatherFor(latitude: latitude, longtitude: longtitude)
+//        } catch{
+//            self.hasError = true
+//            self.error = DataError.custom(error: error)
+//        }
+//    }
     
-    // MARK: - Alamofire
+    // MARK: - Alamofire request
     
     func fetchCurrentWeather(latitude: CLLocationDegrees, longtitude: CLLocationDegrees) async {
-
-        guard let url = weatherService.absoluteURL(latitude: latitude, longtitude: longtitude) else { fatalError("Ошибка URL") }
+        hasError = false
+        guard let url = weatherService.absoluteURL(latitude: latitude, longtitude: longtitude) else {
+            self.hasError = true
+            self.error = DataError.invalidURL
+            return
+        }
 
         self.task = AF.request(url)
             .publishDecodable(type: WeatherResponce.self)
@@ -61,15 +71,41 @@ extension HomeViewModel: HomeViewModelProtocol {
                 case .finished:
                     ()
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    self.hasError = true
+                    self.error = DataError.custom(error: error)
                 }
             }, receiveValue: { [weak self] response in
                 switch response.result {
                 case .success(let weather):
                     self?.weather = weather
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    self?.hasError = true
+                    self?.error = DataError.custom(error: error)
                 }
             })
+    }
+}
+
+// MARK: - DataError
+
+extension HomeViewModel {
+    enum DataError: LocalizedError {
+        case custom(error: Error)
+        case failedToDecode
+        case invalidStatusCode
+        case invalidURL
+        
+        var errorDescription: String? {
+            switch self {
+            case .failedToDecode:
+                return "Ошибка декодирования"
+            case .custom(let error):
+                return error.localizedDescription
+            case .invalidStatusCode:
+                return "Запрос не вернул валидный статус код"
+            case .invalidURL:
+                return "Ошибка URL"
+            }
+        }
     }
 }
