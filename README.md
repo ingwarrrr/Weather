@@ -34,5 +34,7 @@
 
 * SwiftUI
 * Combine
+* Alamofire
 * MVVM
+* CoreLocation
 * JSON parsing
